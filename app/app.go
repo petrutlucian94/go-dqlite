@@ -1,5 +1,6 @@
 package app
 
+import "C"
 import (
 	"context"
 	"crypto/tls"
@@ -515,6 +516,10 @@ func (a *App) FindLeader(ctx context.Context) (*client.Client, error) {
 // Client returns a client connected to the local node.
 func (a *App) Client(ctx context.Context) (*client.Client, error) {
 	return client.New(ctx, a.nodeBindAddress)
+}
+
+func(a *App) GetDqliteVersion() int {
+	return int(C.dqlite_version_number())
 }
 
 // Proxy incoming TLS connections.
