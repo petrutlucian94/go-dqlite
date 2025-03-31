@@ -16,6 +16,7 @@ import (
 	"github.com/canonical/go-dqlite/v3"
 	"github.com/canonical/go-dqlite/v3/client"
 	"github.com/canonical/go-dqlite/v3/driver"
+	"github.com/canonical/go-dqlite/v3/internal/bindings"
 	"github.com/canonical/go-dqlite/v3/internal/protocol"
 	"github.com/pkg/errors"
 	"golang.org/x/sync/semaphore"
@@ -515,6 +516,10 @@ func (a *App) FindLeader(ctx context.Context) (*client.Client, error) {
 // Client returns a client connected to the local node.
 func (a *App) Client(ctx context.Context) (*client.Client, error) {
 	return client.New(ctx, a.nodeBindAddress)
+}
+
+func(a *App) GetDqliteVersion() int {
+	return bindings.GetDqliteVersion()
 }
 
 // Proxy incoming TLS connections.

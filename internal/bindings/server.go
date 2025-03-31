@@ -289,6 +289,11 @@ func (s *Node) DescribeLastEntry() (uint64, uint64, error) {
 	return uint64(index), uint64(term), nil
 }
 
+func GetDqliteVersion() int {
+	return int(C.dqlite_version_number())
+}
+
+
 // GenerateID generates a unique ID for a server.
 func GenerateID(address string) uint64 {
 	caddress := C.CString(address)
